@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<!-- Create a text file named bca.txt in the same folder (any text) -->
+<div id="content"></div>
+
+<script>
+var xhr = new XMLHttpRequest();
+xhr.onreadystatechange = function () {
+  if (xhr.readyState === 4 && xhr.status === 200) {
+    document.getElementById("content").innerHTML = xhr.responseText;
+  }
+};
+xhr.open("GET", "bca.txt", true);
+xhr.send();
+</script>
+</body>
+</html>

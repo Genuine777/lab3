@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Movies (Fetch API)</title>
+<style>
+  table { border-collapse: collapse; width: 100%; }
+  td, th { border: 1px solid #333; padding: 5px; }
+  img { max-width: 80px; }
+</style>
+</head>
+<body>
+
+<table id="movieTable">
+  <tr>
+    <th>ID</th><th>Title</th><th>Poster</th><th>Year</th><th>Genre</th>
+    <th>Rating</th><th>Director</th><th>Country</th><th>Language</th>
+    <th>Actors</th>
+  </tr>
+</table>
+
+<script>
+fetch("https://freetestapi.com/api/v1/movies")
+  .then(response => response.json())
+  .then(data => {
+    let table = document.getElementById("movieTable");
+    data.forEach(movie => {
+      let row = table.insertRow();
+      row.insertCell().innerText = movie.id;
+      row.insertCell().innerText = movie.title;
+      row.insertCell().innerHTML = "<img src='" + movie.poster + "'>";
+      row.insertCell().innerText = movie.year;
+      row.insertCell().innerText = movie.genre;
+      row.insertCell().innerText = movie.rating;
+      row.insertCell().innerText = movie.director;
+      row.insertCell().innerText = movie.country;
+      row.insertCell().innerText = movie.language || movie.languages;
+      row.insertCell().innerText = movie.actors || movie.cast;
+    });
+  })
+  .catch(err => console.error("Failed to load movies:", err));
+</script>
+</body>
+</html>
